@@ -1,0 +1,177 @@
+# Felix Argyle AI Assistant
+
+This project adds a dark blue anime-inspired AI assistant and 3D viewer to your repository, while keeping your original `Felix Argyle.ply` file intact.
+
+## What is included
+
+- 3D model viewer for `.ply` files
+- Automatic detection for mesh vs. Gaussian-splat-like `.ply` files
+- Touch-friendly rotation and zoom controls
+- AI chat panel with a secure backend
+- Voice input and text-to-speech
+- Optional image upload for supported AI models
+- Responsive layout for tablet and mobile devices
+- GitHub Pages frontend deployment guidance
+
+## Important model note
+
+Your large `Felix Argyle.ply` file is already in the repo. This app does not replace or rename it. It loads a model from the browser using a local file picker or a local folder you choose on your device.
+
+Do not upload the large `.ply` file into the Copilot chat. Keep it in your repo or a local folder and load it inside the app from the browser.
+
+## Beginner steps for your Android tablet
+
+1. Open the project in a browser on your Android tablet.
+2. Tap the `Load .PLY` button in the app.
+3. Choose your model from the tablet file picker, such as:
+   - Download folder
+   - Google Drive
+   - Files app
+   - USB transfer folder
+4. The viewer loads it automatically.
+5. If the file is a standard mesh, the app uses the 3D mesh renderer.
+6. If the file looks like a Gaussian-splat point cloud, the app uses a compatible point-cloud renderer.
+
+You can also place the file in a normal folder like:
+
+- `/storage/emulated/0/Download/Felix Argyle.ply`
+- `/sdcard/Download/Felix Argyle.ply`
+
+Then open the browser, choose the file, and load it from there.
+
+## Project structure
+
+- `index.html` — main app shell
+- `styles.css` — anime-inspired dark blue UI
+- `app.js` — viewer, controls, chat, voice, and AI logic
+- `server.js` — secure backend for AI requests
+- `.env.example` — example environment variables
+- `package.json` — backend dependencies
+- `.gitignore` — ignores local secrets and node modules
+
+## Setup for the secure AI backend
+
+1. Open a terminal in the project root.
+2. Copy the example file:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Edit `.env` with your real keys.
+4. Use one of these providers:
+
+   - OpenAI compatible: `OPENAI_API_KEY`
+   - Gemini: `GEMINI_API_KEY`
+
+5. Start the backend:
+
+   ```bash
+   npm install
+   npm start
+   ```
+
+6. Open the app in a browser at:
+
+   ```text
+   http://localhost:3001
+   ```
+
+7. In the app UI, set the backend URL if needed to `http://localhost:3001`.
+
+## Frontend deployment on GitHub Pages
+
+Because the frontend is static HTML/CSS/JS, it can be hosted on GitHub Pages.
+
+1. Push all frontend files to the default branch of your repository.
+2. In GitHub, open:
+   - `Settings`
+   - `Pages`
+3. Set:
+   - Source: `Deploy from a branch`
+   - Branch: `main`
+   - Folder: `/ (root)`
+4. Save.
+5. GitHub will publish the site at:
+
+   ```text
+   https://<your-username>.github.io/my-ai0.2/
+   ```
+
+Important:
+
+- The backend is not hosted on GitHub Pages.
+- Keep AI API keys in the backend `.env` file or in a secure hosting provider, not in browser code.
+- The frontend only calls the backend URL.
+
+## Recommended backend hosting
+
+For production, put the backend on a secure server such as:
+
+- Render
+- Railway
+- Fly.io
+- a small VPS
+- any host that supports Node.js
+
+Then set:
+
+- `PORT=3001`
+- `ALLOWED_ORIGINS=https://<your-username>.github.io`
+- your AI key(s)
+
+And update the frontend backend URL to the deployed backend domain.
+
+## Voice and image features
+
+- Browser microphone support is used for voice input when supported by the browser.
+- Text-to-speech uses the browser's speech engine.
+- Image upload appears only when the configured AI provider supports vision.
+- If the model does not support image input, the upload button is disabled.
+
+## Files you can preserve and use
+
+Your original file remains in the repo root:
+
+```text
+Felix Argyle.ply
+```
+
+You can also keep extra copies in a separate folder if you want a cleaner app folder structure, such as:
+
+```text
+models/Felix Argyle.ply
+```
+
+The app uses the browser file picker, so you never need to paste the huge model into a message or chat.
+
+## Safe setup checklist
+
+- Keep API keys in `.env` only
+- Never leave keys in `index.html` or `app.js`
+- Keep backend URL in browser config only
+- Use GitHub Pages for the frontend only
+
+## Troubleshooting
+
+If the app says the backend is offline:
+
+1. Make sure the backend is running with `npm start`
+2. Check `.env` values
+3. Confirm there are no syntax errors
+4. Verify the browser backend URL matches your server
+
+If the 3D model does not load:
+
+1. Ensure it is a valid `.ply` file
+2. Try opening it again from a local folder on the device
+3. If it is a Gaussian-splat-style `.ply`, the app will use the point-cloud renderer
+4. If it is a standard triangle mesh, the mesh renderer is used
+
+## Repository note
+
+This project keeps your existing file and adds the app around it without replacing the model. You can continue using the exact original `.ply` file or move a copy into a model folder for easier loading.
+
+## License and local use
+
+This project is for local development and personal use unless you add your own license later.

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071a2d" />
+    <title>Felix Argyle AI Assistant</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-wrap">
+          <div class="brand-mark">F</div>
+          <div>
+            <p class="eyebrow">AI companion</p>
+            <h1>Felix Argyle</h1>
+          </div>
+        </div>
+
+        <section class="panel">
+          <div class="section-header">
+            <h2>3D Model</h2>
+          </div>
+
+          <label class="file-picker" for="model-file-input">
+            <span>Load local .PLY</span>
+            <input id="model-file-input" type="file" accept=".ply,.txt" />
+          </label>
+
+          <div class="button-row compact">
+            <button id="load-model-btn" class="primary">Open model</button>
+            <button id="reset-view-btn">Reset view</button>
+          </div>
+
+          <div id="model-status" class="status-card neutral">
+            Waiting for a .ply file.
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-header">
+            <h2>AI Backend</h2>
+          </div>
+
+          <label class="field-wrap">
+            <span>Backend URL</span>
+            <input id="api-base-url" type="text" value="http://localhost:3001" />
+          </label>
+
+          <button id="save-config-btn" class="primary">Save backend</button>
+          <div id="backend-status" class="status-card neutral">Checking backend…</div>
+        </section>
+
+        <section class="panel">
+          <div class="section-header">
+            <h2>Settings</h2>
+          </div>
+
+          <label class="switch-row">
+            <span>Voice input</span>
+            <input id="voice-enabled" type="checkbox" checked />
+          </label>
+
+          <label class="switch-row">
+            <span>Text-to-speech</span>
+            <input id="tts-enabled" type="checkbox" checked />
+          </label>
+
+          <label class="switch-row">
+            <span>Animate lights</span>
+            <input id="ambient-animate" type="checkbox" checked />
+          </label>
+        </section>
+      </aside>
+
+      <main class="content-panel">
+        <div class="viewer-panel">
+          <canvas id="viewer-canvas"></canvas>
+          <div class="viewer-overlay">
+            <div class="viewer-badges">
+              <span id="model-type-badge">Mesh</span>
+              <span id="supports-vision-badge">Vision off</span>
+            </div>
+          </div>
+        </div>
+
+        <section class="chat-panel">
+          <div class="chat-header">
+            <div>
+              <p class="eyebrow">Assistant</p>
+              <h2>Conversation</h2>
+            </div>
+            <button id="clear-chat-btn" class="text-button">Clear</button>
+          </div>
+
+          <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
+
+          <div class="composer">
+            <input
+              id="chat-input"
+              type="text"
+              placeholder="Ask about your model or scene…"
+              aria-label="Chat input"
+            />
+
+            <button id="voice-btn" class="icon-button" title="Voice input">🎙</button>
+            <button id="image-btn" class="icon-button" title="Add image">🖼️</button>
+            <input id="image-input" type="file" accept="image/*" hidden />
+            <button id="send-btn" class="primary">Send</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
